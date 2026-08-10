@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UZOBEST WEBSITE — Software Developer</title>
+<meta name="description" content="Portfolio of UZOBEST WEBSITE, aspiring software developer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0f1420;
+    --bg-elev: #151b2c;
+    --bg-elev-2: #1b2338;
+    --line: #2a3352;
+    --text: #e8ebf5;
+    --text-dim: #8b93b3;
+    --text-faint: #5a6280;
+    --accent: #5b8def;
+    --accent-2: #f2b84b;
+    --green: #6fd68a;
+    --red: #ef6f6f;
+    --radius: 10px;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--accent); color:#0b0f1a;}
+  :focus-visible{outline:2px solid var(--accent-2); outline-offset:3px;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,20,32,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:920px; margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--mono); font-weight:600; font-size:15px; color:var(--text);
+    text-decoration:none; letter-spacing:0.02em;
+  }
+  .logo span{color:var(--accent);}
+  nav.links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  nav.links a{
+    font-family:var(--mono); font-size:13px; text-decoration:none; color:var(--text-dim);
+    transition:color 0.15s ease;
+  }
+  nav.links a:hover{color:var(--accent-2);}
+  .nav-toggle{display:none;}
+
+  /* HERO */
+  .hero{padding:96px 0 72px;}
+  .prompt-line{
+    font-family:var(--mono); font-size:14px; color:var(--text-faint); margin-bottom:18px;
+  }
+  .prompt-line .sym{color:var(--green);}
+  .terminal{
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.5);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px;
+    border-bottom:1px solid var(--line);
+    background:var(--bg-elev-2);
+  }
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot.r{background:#ef6f6f;} .dot.y{background:#f2b84b;} .dot.g{background:#6fd68a;}
+  .terminal-title{
+    margin-left:8px; font-family:var(--mono); font-size:12px; color:var(--text-faint);
+  }
+  .terminal-body{padding:28px 24px 32px;}
+  .typed-cmd{font-family:var(--mono); font-size:15px; color:var(--text-dim);}
+  .typed-cmd .sym{color:var(--green);}
+  .typed-out h1{
+    font-family:var(--sans); font-weight:800; font-size:clamp(28px,5vw,44px);
+    margin:14px 0 6px; letter-spacing:-0.02em; color:var(--text);
+  }
+  .typed-out .role{
+    font-family:var(--mono); color:var(--accent-2); font-size:16px; margin:0 0 18px;
+  }
+  .typed-out p.bio{
+    max-width:56ch; color:var(--text-dim); margin:0 0 26px; font-size:15.5px;
+  }
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; text-decoration:none;
+    padding:11px 18px; border-radius:8px; border:1px solid var(--line);
+    display:inline-flex; align-items:center; gap:8px; transition:all 0.15s ease;
+  }
+  .btn.primary{background:var(--accent); color:#0b0f1a; border-color:var(--accent); font-weight:600;}
+  .btn.primary:hover{background:#7ba3f5;}
+  .btn.ghost{color:var(--text-dim);}
+  .btn.ghost:hover{color:var(--text); border-color:var(--text-dim);}
+
+  /* SECTION HEADERS */
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:36px;}
+  .section-tag{font-family:var(--mono); font-size:12px; color:var(--text-faint);}
+  .section-head h2{font-size:22px; margin:0; font-weight:700;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  .about-grid p{color:var(--text-dim); font-size:15.5px; max-width:68ch;}
+
+  /* SKILLS — package.json style */
+  .pkg{
+    background:var(--bg-elev); border:1px solid var(--line); border-radius:var(--radius);
+    font-family:var(--mono); font-size:13.5px; overflow:hidden;
+  }
+  .pkg-bar{padding:10px 16px; border-bottom:1px solid var(--line); background:var(--bg-elev-2); color:var(--text-faint); font-size:12px;}
+  .pkg-body{padding:20px 22px;}
+  .pkg-row{display:flex; gap:8px; margin-bottom:6px;}
+  .pkg-key{color:var(--accent-2);}
+  .pkg-list{color:var(--text-dim); margin:2px 0 14px 20px;}
+  .skill-tags{display:flex; flex-wrap:wrap; gap:8px 10px; margin:2px 0 14px 0; padding-left:20px;}
+  .tag{
+    font-family:var(--mono); font-size:12.5px; color:var(--text);
+    background:var(--bg-elev-2); border:1px solid var(--line); border-radius:6px;
+    padding:4px 10px;
+  }
+  .skill-group{margin-bottom:8px;}
+  .skill-group-label{color:var(--green); padding-left:0; margin:0 0 8px;}
+
+  /* PROJECTS — git log style */
+  .commit{
+    border-left:2px solid var(--line);
+    padding:0 0 32px 24px;
+    position:relative;
+  }
+  .commit:last-child{padding-bottom:0;}
+  .commit::before{
+    content:''; position:absolute; left:-7px; top:4px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent);
+  }
+  .commit-hash{font-family:var(--mono); color:var(--accent-2); font-size:12.5px;}
+  .commit-msg{font-size:18px; font-weight:700; margin:6px 0 8px;}
+  .commit-desc{color:var(--text-dim); font-size:14.5px; max-width:64ch; margin:0 0 12px;}
+  .commit-stats{font-family:var(--mono); font-size:12px; color:var(--text-faint); margin-bottom:12px;}
+  .commit-stats .plus{color:var(--green);}
+  .commit-stats .minus{color:var(--red);}
+  .commit-links{display:flex; gap:16px;}
+  .commit-links a{
+    font-family:var(--mono); font-size:13px; color:var(--accent);
+    text-decoration:none; border-bottom:1px solid transparent;
+  }
+  .commit-links a:hover{border-bottom-color:var(--accent);}
+
+  /* CONTACT */
+  .contact-terminal .typed-cmd{margin-bottom:16px;}
+  .contact-list{list-style:none; margin:0; padding:0; font-family:var(--mono); font-size:14.5px;}
+  .contact-list li{padding:8px 0; border-bottom:1px dashed var(--line); display:flex; gap:14px;}
+  .contact-list li:last-child{border-bottom:none;}
+  .contact-list .flag{color:var(--accent-2); min-width:110px;}
+  .contact-list a{color:var(--text); text-decoration:none;}
+  .contact-list a:hover{color:var(--accent);}
+
+  footer{
+    padding:32px 0 48px; text-align:center;
+    font-family:var(--mono); font-size:12px; color:var(--text-faint);
+  }
+
+  @media (max-width:640px){
+    nav.links{gap:16px;}
+    .nav-inner{padding:14px 18px;}
+    .hero{padding:56px 0 48px;}
+    section{padding:48px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">~/<span>uzobest</span></a>
+    <ul class="links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<div id="top" class="wrap hero">
+  <div class="prompt-line"><span class="sym">➜</span> ~ open portfolio.md</div>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="terminal-title">about-me.sh — 80×24</span>
+    </div>
+    <div class="terminal-body">
+      <div class="typed-cmd"><span class="sym">$</span> whoami</div>
+      <div class="typed-out">
+        <h1>UZOBEST WEBSITE</h1>
+        <p class="role">// Junior Software Developer, open to work</p>
+        <p class="bio">
+          I build clean, practical software and I'm looking for my first
+          (or next) role as a developer. Replace this line with 2–3
+          sentences on what you build, what you're learning, and what
+          kind of team you want to join.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#projects">View projects →</a>
+          <a class="btn ghost" href="mailto:you@example.com">Get in touch</a>
+          <a class="btn ghost" href="#" target="_blank" rel="noopener">Résumé (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">01</span>
+      <h2>about.md</h2>
+    </div>
+    <div class="about-grid">
+      <p>
+        I'm a programmer who enjoys turning ideas into working software —
+        starting with the fundamentals of logic and structure, then
+        building outward into real applications people can actually use.
+        I like the process of breaking a big problem into small, solvable
+        pieces, writing clean code, and testing it until it does exactly
+        what it should.
+      </p>
+      <p>
+        I'm comfortable across the stack, from writing the logic that
+        powers an app to shaping the interface someone interacts with,
+        and I care about code that's not just functional but readable and
+        easy for the next person to build on. I'm currently looking for a
+        developer role where I can keep growing, ship things that matter,
+        and learn from people better than me.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">02</span>
+      <h2>stack.json</h2>
+    </div>
+    <div class="pkg">
+      <div class="pkg-bar">package.json</div>
+      <div class="pkg-body">
+        <div class="skill-group">
+          <p class="pkg-row skill-group-label">"languages":</p>
+          <div class="skill-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">SQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <p class="pkg-row skill-group-label">"frameworks":</p>
+          <div class="skill-tags">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Express</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <p class="pkg-row skill-group-label">"tools":</p>
+          <div class="skill-tags">
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Postman</span>
+          </div>
+        </div>
+        <p style="color:var(--text-faint); margin:16px 0 0; font-size:12.5px;">
+          // swap these for the languages, frameworks and tools you actually use
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">03</span>
+      <h2>git log --projects</h2>
+    </div>
+
+    <div class="commit">
+      <div class="commit-hash">commit a7f3c9d</div>
+      <div class="commit-msg">Project One — short punchy name</div>
+      <p class="commit-desc">
+        One or two sentences on what it does and who it's for. Say what
+        problem it solves, not just what tech you used.
+      </p>
+      <div class="commit-stats"><span class="plus">+ React</span> &nbsp; <span class="plus">+ Node.js</span> &nbsp; <span class="plus">+ PostgreSQL</span></div>
+      <div class="commit-links">
+        <a href="#" target="_blank" rel="noopener">Live demo →</a>
+        <a href="#" target="_blank" rel="noopener">Source code →</a>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="commit-hash">commit e1b6042</div>
+      <div class="commit-msg">Project Two — short punchy name</div>
+      <p class="commit-desc">
+        What it does, the interesting technical decision you made, and
+        the result (faster, cleaner, solved a real annoyance, etc).
+      </p>
+      <div class="commit-stats"><span class="plus">+ Python</span> &nbsp; <span class="plus">+ Flask</span> &nbsp; <span class="minus">- manual process</span></div>
+      <div class="commit-links">
+        <a href="#" target="_blank" rel="noopener">Live demo →</a>
+        <a href="#" target="_blank" rel="noopener">Source code →</a>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="commit-hash">commit 5f02ab1</div>
+      <div class="commit-msg">Project Three — short punchy name</div>
+      <p class="commit-desc">
+        A smaller project or a learning exercise you're proud of — shows
+        range and that you build outside of assignments/work.
+      </p>
+      <div class="commit-stats"><span class="plus">+ JavaScript</span> &nbsp; <span class="plus">+ CSS</span></div>
+      <div class="commit-links">
+        <a href="#" target="_blank" rel="noopener">Live demo →</a>
+        <a href="#" target="_blank" rel="noopener">Source code →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">04</span>
+      <h2>contact.sh</h2>
+    </div>
+    <div class="terminal contact-terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="terminal-title">reach-me.sh</span>
+      </div>
+      <div class="terminal-body">
+        <div class="typed-cmd"><span class="sym">$</span> ./contact --list</div>
+        <ul class="contact-list">
+          <li><span class="flag">--email</span> <a href="mailto:you@example.com">you@example.com</a></li>
+          <li><span class="flag">--github</span> <a href="#" target="_blank" rel="noopener">github.com/yourhandle</a></li>
+          <li><span class="flag">--linkedin</span> <a href="#" target="_blank" rel="noopener">linkedin.com/in/yourhandle</a></li>
+          <li><span class="flag">--location</span> <span>Your City, Country (open to remote)</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> UZOBEST WEBSITE — built with HTML, CSS &amp; a bit of JS.
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
